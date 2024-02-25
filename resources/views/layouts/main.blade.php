@@ -13,7 +13,7 @@
 <div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto px-0">
-            <div id="sidebar" class="collapse collapse-horizontal show border-end">
+            <div id="sidebar" class="collapse collapse-horizontal show border-end h-100">
                 <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
                     <a href="{{ route('feed.add') }}"
                        class="list-group-item border-end-0 d-inline-block text-truncate text-success"
