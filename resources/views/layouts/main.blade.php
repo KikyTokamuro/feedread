@@ -15,10 +15,6 @@
         <div class="col-auto px-0">
             <div id="sidebar" class="collapse collapse-horizontal show border-end h-100">
                 <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                    <a href="{{ route('feed.add') }}"
-                       class="list-group-item border-end-0 d-inline-block text-truncate text-success"
-                       data-bs-parent="#sidebar"><i class="bi bi-plus-square-fill"></i> <span>Add</span> </a>
-
                     @foreach($feeds as $feed)
                         <a href="{{ route('feed.show', $feed->id) }}"
                            class="list-group-item border-end-0 d-inline-block text-truncate"
@@ -38,7 +34,13 @@
         </div>
         <main class="col ps-md-2 pt-2">
             <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-               class="border rounded-1 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+               class="border rounded-1 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Feed</a>
+
+            @if(!request()->is('feeds/add'))
+                <a href="{{ route('feed.add') }}" class="border rounded-1 p-1 text-decoration-none text-success">
+                    <i class="bi bi-plus-square-fill py-2 p-1"></i> Add
+                </a>
+            @endif
 
             @yield('content')
         </main>

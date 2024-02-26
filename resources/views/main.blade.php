@@ -8,5 +8,4 @@
             <i class="bi bi-github"></i> Source
         </a>
     </div>
-
 @endsection
