@@ -34,9 +34,9 @@ class FeedController extends Controller
             'url' => 'required|string'
         ]);
 
-        Feed::create($data);
+        $feed = Feed::create($data);
 
-        return redirect()->route('main');
+        return redirect()->route('feed.show', $feed->id);
     }
 
     /**
