@@ -9,4 +9,4 @@ Route::post('/feeds', 'App\Http\Controllers\FeedController@store')->name('feed.s
 Route::get('/feeds/{feed}', 'App\Http\Controllers\FeedController@show')->name('feed.show');
 //Route::get('/feeds/{feed}/edit', 'App\Http\Controllers\FeedController@edit')->name('feed.edit');
 //Route::patch('/feeds/{feed}', 'App\Http\Controllers\FeedController@update')->name('feed.update');
-//Route::delete('/feeds/{feed}', 'App\Http\Controllers\FeedController@delete')->name('feed.delete');
+Route::delete('/feeds/{feed}', 'App\Http\Controllers\FeedController@delete')->name('feed.delete');

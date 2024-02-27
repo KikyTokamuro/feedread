@@ -68,4 +68,17 @@ class FeedController extends Controller
 
         return view('feed.show', compact('feed', 'data'));
     }
+
+    /**
+     * Delete feed
+     *
+     * @param Feed $feed
+     * @return RedirectResponse
+     */
+    public function delete(Feed $feed): RedirectResponse
+    {
+        $feed->delete();
+
+        return redirect()->route('main');
+    }
 }
