@@ -81,4 +81,34 @@ class FeedController extends Controller
 
         return redirect()->route('main');
     }
+
+    /**
+     * Show edit feed
+     *
+     * @param Feed $feed
+     * @return View
+     */
+    public function edit(Feed $feed): View
+    {
+        return view('feed.edit', compact('feed'));
+    }
+
+    /**
+     * Update feed
+     *
+     * @param Request $request
+     * @param Feed $feed
+     * @return RedirectResponse
+     */
+    public function update(Request $request, Feed $feed): RedirectResponse
+    {
+        $data = $request->validate([
+            'title' => 'required|string',
+            'url' => 'required|string'
+        ]);
+
+        $feed->update($data);
+
+        return redirect()->route('feed.show', $feed->id);
+    }
 }
