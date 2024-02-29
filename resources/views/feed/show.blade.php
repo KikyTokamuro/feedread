@@ -46,5 +46,9 @@
                 @endforeach
             </ul>
         </div>
+    @else
+        <div class="p-3 mb-2 bg-danger text-white">Problem when retrieving data from:
+            <a href="{{ $feed->url }}" class="link-light">{{ $feed->url }}</a>
+        </div>
     @endif
 @endsection
