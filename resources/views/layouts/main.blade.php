@@ -46,15 +46,15 @@
                     </div>
                 @endif
 
-                @if(!request()->is('feeds/add'))
-                    <div class="btn-group me-2" role="group">
+                <div class="btn-group me-2" role="group">
+                    @if(!request()->is('feeds/add'))
                         <a href="{{ route('feed.add') }}"
                            class="btn btn-outline border text-decoration-none text-success">
                             <i class="bi bi-plus-square-fill bi-lg"></i> Add
                         </a>
-                        @yield('buttons')
-                    </div>
-                @endif
+                    @endif
+                    @yield('buttons')
+                </div>
             </div>
 
             @yield('content')
