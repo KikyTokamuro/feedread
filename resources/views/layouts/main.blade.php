@@ -23,7 +23,8 @@
                                data-bs-parent="#sidebar">
                                 @php($favicon = $feed->favicon())
                                 @if($favicon != null)
-                                    <img src="{{ $favicon }}" alt="{{ $feed->title }}"  style="width: 15px; height: 15px;">
+                                    <img src="{{ $favicon }}" alt="{{ $feed->title }}"
+                                         style="width: 15px; height: 15px;">
                                 @else
                                     <i class="bi bi-rss"></i>
                                 @endif
@@ -36,16 +37,25 @@
             </div>
         @endif
         <main class="col ps-md-2 pt-2">
-            @if(count($feeds) > 0)
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                   class="border rounded-1 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Feed</a>
-            @endif
+            <div class="btn-toolbar" role="toolbar">
+                @if(count($feeds) > 0)
+                    <div class="btn-group me-2" role="group">
+                        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                           class="btn btn-outline border text-decoration-none text-primary"><i
+                                class="bi bi-list bi-lg py-2 p-1"></i> Feed</a>
+                    </div>
+                @endif
 
-            @if(!request()->is('feeds/add'))
-                <a href="{{ route('feed.add') }}" class="border rounded-1 p-1 text-decoration-none text-success">
-                    <i class="bi bi-plus-square-fill py-2 p-1"></i> Add
-                </a>
-            @endif
+                @if(!request()->is('feeds/add'))
+                    <div class="btn-group me-2" role="group">
+                        <a href="{{ route('feed.add') }}"
+                           class="btn btn-outline border text-decoration-none text-success">
+                            <i class="bi bi-plus-square-fill bi-lg"></i> Add
+                        </a>
+                        @yield('buttons')
+                    </div>
+                @endif
+            </div>
 
             @yield('content')
         </main>

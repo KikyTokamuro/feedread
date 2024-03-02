@@ -12,21 +12,26 @@
                     Permanently delete "{{ $feed->title }}" feed?
                 </div>
                 <div class="modal-footer">
-                    <form id="delete_form" action="{{ route('feed.delete', $feed->id) }}" method="post" class="py-2 p-1 d-inline">
+                    <form id="delete_form" action="{{ route('feed.delete', $feed->id) }}" method="post"
+                          class="py-2 p-1 d-inline">
                         @csrf
                         @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <a href="{{ route('feed.edit', $feed->id) }}" class="border rounded-1 m-lg-1 p-1 text-decoration-none text-warning">
-        <i class="bi bi-pencil-fill py-2 p-1"></i> Edit
-    </a>
-    <a href="#" class="border rounded-1 p-1 text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteFeedModal">
-        <i class="bi bi-trash3-fill py-2 p-1"></i> Delete
-    </a>
+
+    @section('buttons')
+        <a href="{{ route('feed.edit', $feed->id) }}" class="btn btn-outline border text-decoration-none text-warning">
+            <i class="bi bi-pencil-fill bi-lg"></i> Edit
+        </a>
+        <a href="#" class="btn btn-outline border text-decoration-none text-danger" data-bs-toggle="modal"
+           data-bs-target="#deleteFeedModal">
+            <i class="bi bi-trash3-fill bi-lg"></i> Delete
+        </a>
+    @endsection
 
     <div class="page-header pt-3">
         <h2>{{ $feed->title }}</h2>
