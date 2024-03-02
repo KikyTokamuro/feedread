@@ -36,7 +36,7 @@
                 </div>
             </div>
         @endif
-        <main class="col ps-md-2 pt-2">
+        <main class="col ps-md-2 pt-2 vh-100">
             <div class="btn-toolbar" role="toolbar">
                 @if(count($feeds) > 0)
                     <div class="btn-group me-2" role="group">
