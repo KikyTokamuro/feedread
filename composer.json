@@ -1,5 +1,5 @@
 {
-    "name": "KikyTokamuro/feedread",
+    "name": "kikytokamuro/feedread",
     "type": "feedread",
     "description": "Simple Atom/RSS reader",
     "keywords": ["laravel", "framework", "rss", "atom", "reader"],
