@@ -24,10 +24,10 @@
     </div>
 
     @section('buttons')
-        <a href="{{ route('feed.edit', $feed->id) }}" class="btn btn-outline border text-decoration-none text-warning">
+        <a id="edit-feed-btn" href="{{ route('feed.edit', $feed->id) }}" class="btn btn-outline text-decoration-none">
             <i class="bi bi-pencil-fill bi-lg"></i> Edit
         </a>
-        <a href="#" class="btn btn-outline border text-decoration-none text-danger" data-bs-toggle="modal"
+        <a id="delete-feed-btn" href="#" class="btn btn-outline text-decoration-none" data-bs-toggle="modal"
            data-bs-target="#deleteFeedModal">
             <i class="bi bi-trash3-fill bi-lg"></i> Delete
         </a>

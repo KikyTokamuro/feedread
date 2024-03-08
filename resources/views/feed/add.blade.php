@@ -27,7 +27,7 @@
                 @enderror
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-primary float-right">Add</button>
+                <button id="add-btn" type="submit" class="btn border-0 float-right">Add</button>
             </div>
         </form>
     </div>

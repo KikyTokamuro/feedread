@@ -29,7 +29,7 @@
                 @enderror
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-primary float-right">Save</button>
+                <button id="save-btn" type="submit" class="btn border-0 btn-primary">Save</button>
             </div>
         </form>
     </div>

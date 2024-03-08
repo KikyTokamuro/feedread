@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 // Variables
 @import 'variables';
@@ -7,3 +7,56 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #fafafa;
+}
+
+a {
+    color: #7386D5;
+}
+
+#collapse-sidebar-btn,
+#save-btn,
+#add-btn{
+    background: #7386D5;
+    color: var(--bs-body-bg);
+}
+
+#add-feed-btn {
+    background: rgba(var(--bs-success-rgb));
+    color: var(--bs-body-bg);
+}
+
+#edit-feed-btn {
+    background: rgba(var(--bs-warning-rgb));
+    color: var(--bs-body-bg);
+}
+
+#delete-feed-btn {
+    background: rgba(var(--bs-danger-rgb));
+    color: var(--bs-body-bg);
+}
+
+#sidebar, #sidebar-nav {
+    background: #7386D5;
+}
+
+.list-group-item {
+    display: flex !important;
+    align-items: center;
+    background: #7386D5;
+    color: var(--bs-body-bg);
+}
+
+.list-group-item:hover {
+    color: #7386D5;
+    background: var(--bs-body-bg);
+}
+
+.list-group-item img {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}

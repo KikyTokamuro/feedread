@@ -15,16 +15,15 @@
     <div class="row flex-nowrap">
         @if(count($feeds) > 0)
             <div class="col-auto px-0">
-                <div id="sidebar" class="collapse collapse-horizontal show border-end h-100">
-                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                <div id="sidebar" class="collapse collapse-horizontal show h-100">
+                    <div id="sidebar-nav" class="list-group rounded-0 text-sm-start min-vh-100">
                         @foreach($feeds as $feed)
                             <a href="{{ route('feed.show', $feed->id) }}"
-                               class="list-group-item border-end-0 d-inline-block text-truncate"
+                               class="list-group-item border-0 d-inline-block text-truncate"
                                data-bs-parent="#sidebar">
                                 @php($favicon = $feed->favicon())
                                 @if($favicon != null)
-                                    <img src="{{ $favicon }}" alt="{{ $feed->title }}"
-                                         style="width: 15px; height: 15px;">
+                                    <img src="{{ $favicon }}" alt="{{ $feed->title }}">
                                 @else
                                     <i class="bi bi-rss"></i>
                                 @endif
@@ -36,21 +35,21 @@
                 </div>
             </div>
         @endif
-        <main class="col ps-md-2 pt-2 vh-100">
+        <main class="col ps-md-2 pt-2 min-vh-100">
             <div class="btn-toolbar" role="toolbar">
                 @if(count($feeds) > 0)
                     <div class="btn-group me-2" role="group">
-                        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                           class="btn btn-outline border text-decoration-none text-primary"><i
+                        <a id="collapse-sidebar-btn" href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
+                           class="btn btn-outline text-decoration-none"><i
                                 class="bi bi-list bi-lg py-2 p-1"></i> Feed</a>
                     </div>
                 @endif
 
                 <div class="btn-group me-2" role="group">
                     @if(!request()->is('feeds/add'))
-                        <a href="{{ route('feed.add') }}"
-                           class="btn btn-outline border text-decoration-none text-success">
-                            <i class="bi bi-plus-square-fill bi-lg"></i> Add
+                        <a id="add-feed-btn" href="{{ route('feed.add') }}"
+                           class="btn btn-outline text-decoration-none">
+                            <i class="bi bi-plus-square bi-lg"></i> Add
                         </a>
                     @endif
                     @yield('buttons')
