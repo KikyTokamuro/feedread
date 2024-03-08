@@ -36,16 +36,19 @@
     @endif()
     <hr>
     @if(isset($data['items']))
-        <div class="list-group m-lg-2">
-            <ul>
-                @foreach($data['items'] as $item)
-                    <li><small>{{ $item->get_date('j M Y, g:i a') }}</small> - <a
-                            href="{{ $item->get_permalink() }}"
-                            target="_blank">{{ $item->get_title() }}</a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        @foreach($data['items'] as $item)
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ $item['link'] }}" target="_blank">{{ $item['title'] }}</a></h5>
+                            <p class="card-text">{{ $item['content'] }}</p>
+                            <p class="card-text"><small class="text-muted">{{ $item['date'] }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     @else
         <div class="p-3 mb-2 bg-danger text-white">Problem when retrieving data from:
             <a href="{{ $feed->url }}" class="link-light">{{ $feed->url }}</a>

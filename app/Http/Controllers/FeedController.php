@@ -6,8 +6,8 @@ use App\Cache\SimpleCacheBridge;
 use App\Models\Feed;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class FeedController extends Controller
 {
@@ -63,7 +63,16 @@ class FeedController extends Controller
             $simplepie->handle_content_type();
 
             $data['description'] = $simplepie->get_description();
-            $data['items'] = $simplepie->get_items();
+
+            foreach ($simplepie->get_items() as $item)
+            {
+                $data['items'][] = [
+                  'title' => $item->get_title(),
+                  'link' => $item->get_permalink(),
+                  'content' => strip_tags(Str::limit($item->get_content(), 1000)),
+                  'date' => $item->get_date('j M Y, g:i a'),
+                ];
+            }
         }
 
         return view('feed.show', compact('feed', 'data'));
