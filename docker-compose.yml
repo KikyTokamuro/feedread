@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+    # PHP Service
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: feedread-app
+        container_name: feedread-app
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
+        depends_on:
+            - database
+            - webserver
+        volumes:
+            - ./:/var/www
+            - ./storage:/var/www/storage
+        networks:
+            - app-network
+
+    # MySQL Service
+    database:
+        image: mysql:8.3.0
+        container_name: feedread-database
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "4306:3306"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        networks:
+            - app-network
+
+    # Nginx Service
+    webserver:
+        image: nginx:alpine
+        container_name: feedread-webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/var/www
+            - ./nginx:/etc/nginx/conf.d
+        networks:
+            - app-network
+
+# Networks Configuration
+networks:
+    app-network:
+        driver: bridge
