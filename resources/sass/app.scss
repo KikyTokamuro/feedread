@@ -41,6 +41,12 @@ a {
 
 #sidebar, #sidebar-nav {
     background: #7386D5;
+    max-width: 300px;
+}
+
+#feed-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .list-group-item {

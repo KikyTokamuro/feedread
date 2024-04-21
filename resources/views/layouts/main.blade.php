@@ -27,7 +27,7 @@
                                 @else
                                     <i class="bi bi-rss"></i>
                                 @endif
-                                <span>{{ $feed->title }}</span>
+                                <span id="feed-title">{{ $feed->title }}</span>
                             </a>
                         @endforeach
 
