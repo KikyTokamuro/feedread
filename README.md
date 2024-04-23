@@ -1,6 +1,9 @@
 # FeedRead
 Simple Atom/RSS reader
 
+<img src="./img/1.png" width="900">
+<img src="./img/2.png" width="900">
+
 ## Run 
 ```sh
 # Copy env file
