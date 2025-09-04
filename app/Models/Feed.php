@@ -17,7 +17,13 @@ class Feed extends Model
 
     public function favicon(): ?string
     {
-        $favicon = Favicon::fetch($this->url)->cache(now()->addWeek());
-        return $favicon->getFaviconUrl();
+        $favicon = Favicon::fetchOr(
+            $this->url,
+            '/favicon.ico'
+        );
+        if (is_string($favicon)) {
+            return $favicon;
+        }
+        return $favicon->cache(now()->addWeek())->getFaviconUrl();
     }
 }
