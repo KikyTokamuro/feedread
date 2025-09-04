@@ -11,6 +11,8 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: #fafafa;
+    overflow: hidden;
+    height: 100vh;
 }
 
 a {
@@ -39,9 +41,17 @@ a {
     color: var(--bs-body-bg);
 }
 
-#sidebar, #sidebar-nav {
+#sidebar {
     background: #7386D5;
     max-width: 300px;
+    min-width: 150px;
+    height: 100vh;
+}
+
+#sidebar-nav {
+    background: #7386D5;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 #feed-title {
@@ -54,6 +64,8 @@ a {
     align-items: center;
     background: #7386D5;
     color: var(--bs-body-bg);
+    white-space: nowrap;
+    min-height: 35px;
 }
 
 .list-group-item:hover {
@@ -65,4 +77,15 @@ a {
     width: 15px;
     height: 15px;
     margin-right: 10px;
+}
+
+main {
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-toolbar {
+    flex-shrink: 0;
 }
