@@ -1,12 +1,12 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 // Variables
-@import 'variables';
+@use 'variables';
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons.css';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
