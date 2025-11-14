@@ -41,6 +41,13 @@ a {
     color: var(--bs-body-bg);
 }
 
+.preview-feed-item-btn,
+.preview-feed-item-btn:hover {
+    background: #7386d5;
+    color: var(--bs-body-bg);
+    margin-right: 20px;
+}
+
 #sidebar {
     background: #7386D5;
     max-width: 300px;
@@ -88,4 +95,20 @@ main {
 
 .btn-toolbar {
     flex-shrink: 0;
+}
+
+.card-preview-title {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+#preview-feed-item-iframe {
+    width: 100%;
+    height: 70vh;
+}
+
+#preview-loading-spinner {
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: opacity 0.3s ease;
 }
