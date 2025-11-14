@@ -10,3 +10,5 @@ Route::get('/feeds/{feed}', 'App\Http\Controllers\FeedController@show')->name('f
 Route::get('/feeds/{feed}/edit', 'App\Http\Controllers\FeedController@edit')->name('feed.edit');
 Route::patch('/feeds/{feed}', 'App\Http\Controllers\FeedController@update')->name('feed.update');
 Route::delete('/feeds/{feed}', 'App\Http\Controllers\FeedController@delete')->name('feed.delete');
+
+Route::get('/iframe', 'App\Http\Controllers\IframeController@proxy')->name('iframe.proxy');

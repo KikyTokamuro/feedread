@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "ashallendesign/favicon-fetcher": "^3.2",
+        "athlon1600/php-proxy": "^5.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
