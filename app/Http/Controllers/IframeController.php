@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProxyRequest;
 use Proxy\Proxy;
-use Proxy\Http\Request as ProxyRequest;
+use Proxy\Http\Request;
 use Proxy\Plugin\CookiePlugin;
 use Proxy\Plugin\HeaderRewritePlugin;
 use Proxy\Plugin\ProxifyPlugin;
@@ -15,11 +15,12 @@ class IframeController extends Controller
     /**
      * Proxy URL
      *
-     * @param Request $request
+     * @param ProxyRequest $request
      */
-    public function proxy(Request $request)
+    public function proxy(ProxyRequest $request)
     {
-        $url = url_decrypt($request->get('q'));
+        $data = $request->validated();
+        $url = url_decrypt($data['q']);
 
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return response('Invalid URL.', 400);
@@ -32,7 +33,7 @@ class IframeController extends Controller
         $proxy->addSubscriber(new ProxifyPlugin());
         
         try {
-            $req = ProxyRequest::createFromGlobals();
+            $req = Request::createFromGlobals();
             $req->get->clear();
             $response = $proxy->forward($req, $url);
 
