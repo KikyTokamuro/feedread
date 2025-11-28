@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Services\FeedService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use AshAllenDesign\FaviconFetcher\Facades\Favicon;
 
 class Feed extends Model
 {
@@ -17,13 +17,6 @@ class Feed extends Model
 
     public function favicon(): ?string
     {
-        $favicon = Favicon::fetchOr(
-            $this->url,
-            '/favicon.ico'
-        );
-        if (is_string($favicon)) {
-            return $favicon;
-        }
-        return $favicon->cache(now()->addWeek())->getFaviconUrl();
+        return FeedService::getFaviconUrl($this);
     }
 }
