@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Cache\SimpleCacheBridge;
 use App\Http\Requests\StoreFeedRequest;
+use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Feed;
-use App\Settings\GeneralSettings;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 
@@ -104,16 +103,13 @@ class FeedController extends Controller
     /**
      * Update feed
      *
-     * @param Request $request
+     * @param UpdateFeedRequest $request
      * @param Feed $feed
      * @return RedirectResponse
      */
-    public function update(Request $request, Feed $feed): RedirectResponse
+    public function update(UpdateFeedRequest $request, Feed $feed): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'url' => 'required|string'
-        ]);
+        $data = $request->validated();
 
         $feed->update($data);
 
