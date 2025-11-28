@@ -17,6 +17,9 @@
             <div class="col-auto px-0">
                 <div id="sidebar" class="collapse collapse-horizontal show h-100">
                     <div id="sidebar-nav" class="list-group rounded-0 text-sm-start min-vh-100">
+                        <div class="d-flex pt-1 align-items-center justify-content-center border-bottom border-light">
+                            <a href="/" class="text-decoration-none fs-4 text-light"><i class="text-warning bi bi-rss-fill"></i>FeedRead</a>
+                        </div>
                         @foreach($feeds as $feed)
                             <a href="{{ route('feed.show', $feed->id) }}"
                                class="list-group-item border-0 d-inline-block text-truncate"
