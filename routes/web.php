@@ -11,4 +11,7 @@ Route::get('/feeds/{feed}/edit', 'App\Http\Controllers\FeedController@edit')->na
 Route::patch('/feeds/{feed}', 'App\Http\Controllers\FeedController@update')->name('feed.update');
 Route::delete('/feeds/{feed}', 'App\Http\Controllers\FeedController@delete')->name('feed.delete');
 
+Route::get('/settings', 'App\Http\Controllers\SettingsController@index')->name('settings.show');
+Route::patch('/settings/', 'App\Http\Controllers\SettingsController@update')->name('settings.update');
+
 Route::get('/iframe', 'App\Http\Controllers\IframeController@proxy')->name('iframe.proxy');

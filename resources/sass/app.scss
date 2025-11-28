@@ -10,7 +10,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: #fafafa;
+    background: var(--bs-body-bg);
     overflow: hidden;
     height: 100vh;
 }
@@ -19,10 +19,20 @@ a {
     color: #7386D5;
 }
 
+[type="checkbox"]:checked {
+    background-color: #7386D5;
+    border-color: #7386D5;
+}
+
 #collapse-sidebar-btn,
 #save-btn,
 #add-btn{
     background: #7386D5;
+    color: var(--bs-body-bg);
+}
+
+#settings-btn {
+    background: #d573b8;
     color: var(--bs-body-bg);
 }
 
@@ -109,6 +119,6 @@ main {
 }
 
 #preview-loading-spinner {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--bs-body-bg);
     transition: opacity 0.3s ease;
 }
