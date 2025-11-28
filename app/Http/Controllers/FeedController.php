@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cache\SimpleCacheBridge;
 use App\Models\Feed;
+use App\Settings\GeneralSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

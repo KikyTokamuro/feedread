@@ -31,7 +31,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="preview-loading-spinner" class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 bg-light" style="z-index: 10;">
+                    <div id="preview-loading-spinner" class="d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100" style="z-index: 10;">
                         <div class="spinner-border text-primary" role="status">
                         </div>
                     </div>
@@ -65,9 +65,11 @@
                     <div class="col-md">
                         <div class="card-body">
                         <div class="card-preview-title">
-                            <a class="preview-feed-item-btn btn btn-outline text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#previewFeedItemModal" data-iframe-link="{{ route('iframe.proxy') }}?q={{ urlencode($item['link']) }}">
-                                <i class="bi bi-binoculars bi-lg"></i>
-                            </a>
+                            @if($settings->preview)
+                                <a class="preview-feed-item-btn btn btn-outline text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#previewFeedItemModal" data-iframe-link="{{ route('iframe.proxy') }}?q={{ urlencode($item['link']) }}">
+                                    <i class="bi bi-binoculars bi-lg"></i>
+                                </a>
+                            @endif
                             <h5 class="card-title"><a href="{{ $item['link'] }}" target="_blank">{{ $item['title'] }}</a></h5>
                         </div>
                             <p class="card-text">{{ $item['content'] }}</p>

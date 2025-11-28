@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" @if($settings->dark) data-bs-theme="dark" @endif>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <title>FeedRead</title>
-
+    
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -57,6 +57,15 @@
                     @endif
                     @yield('buttons')
                 </div>
+
+                @if(!request()->is('settings'))
+                    <div class="btn-group me-2" role="group">
+                        <a id="settings-btn" href="{{ route('settings.show') }}"
+                           class="btn btn-outline text-decoration-none">
+                            <i class="bi bi-gear bi-lg"></i> Settings
+                        </a>
+                    </div>
+                @endif
             </div>
 
             @yield('content')
