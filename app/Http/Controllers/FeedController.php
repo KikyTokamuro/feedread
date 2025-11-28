@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cache\SimpleCacheBridge;
+use App\Http\Requests\StoreFeedRequest;
 use App\Models\Feed;
 use App\Settings\GeneralSettings;
 use Illuminate\Http\RedirectResponse;
@@ -25,15 +26,12 @@ class FeedController extends Controller
     /**
      * Store new feed
      *
-     * @param Request $request
+     * @param StoreFeedRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreFeedRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'url' => 'required|string'
-        ]);
+        $data = $request->validated();
 
         $feed = Feed::create($data);
 
