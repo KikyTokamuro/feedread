@@ -31,7 +31,6 @@ class SettingsController extends Controller
     public function update(GeneralSettings $settings, UpdateGeneralSettingsRequest $request): RedirectResponse
     {
         $validated = $request->validated();
-        
         $settings->fill($validated)->save();
 
         return redirect()->route('settings.show');

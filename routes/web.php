@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Main page
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('main');
 
+// Feeds
 Route::get('/feeds/add', 'App\Http\Controllers\FeedController@add')->name('feed.add');
 Route::post('/feeds', 'App\Http\Controllers\FeedController@store')->name('feed.store');
 Route::get('/feeds/{feed}', 'App\Http\Controllers\FeedController@show')->name('feed.show');
@@ -11,7 +13,9 @@ Route::get('/feeds/{feed}/edit', 'App\Http\Controllers\FeedController@edit')->na
 Route::patch('/feeds/{feed}', 'App\Http\Controllers\FeedController@update')->name('feed.update');
 Route::delete('/feeds/{feed}', 'App\Http\Controllers\FeedController@delete')->name('feed.delete');
 
+// Settings
 Route::get('/settings', 'App\Http\Controllers\SettingsController@index')->name('settings.show');
 Route::patch('/settings/', 'App\Http\Controllers\SettingsController@update')->name('settings.update');
 
+// Iframe proxy
 Route::get('/iframe', 'App\Http\Controllers\IframeController@proxy')->name('iframe.proxy');

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Cache\SimpleCacheBridge;
+use App\Http\Requests\StoreFeedRequest;
+use App\Http\Requests\UpdateFeedRequest;
 use App\Models\Feed;
-use App\Settings\GeneralSettings;
+use App\Services\FeedService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
 
 class FeedController extends Controller
 {
+    public function __construct(
+        protected FeedService $feedService
+    ) { }
+
     /**
      * Show new feed page
      *
@@ -25,16 +28,12 @@ class FeedController extends Controller
     /**
      * Store new feed
      *
-     * @param Request $request
+     * @param StoreFeedRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreFeedRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'url' => 'required|string'
-        ]);
-
+        $data = $request->validated();
         $feed = Feed::create($data);
 
         return redirect()->route('feed.show', $feed->id);
@@ -48,33 +47,7 @@ class FeedController extends Controller
      */
     public function show(Feed $feed): View
     {
-        $data = [];
-
-        // Simple cache
-        $cache = new SimpleCacheBridge();
-
-        // Create rss parser
-        $simplepie = new \SimplePie\SimplePie();
-        $simplepie->set_cache($cache);
-        $simplepie->set_feed_url($feed->url);
-        $success = $simplepie->init();
-
-        // Check parsing state
-        if ($success) {
-            $simplepie->handle_content_type();
-
-            $data['description'] = $simplepie->get_description();
-
-            foreach ($simplepie->get_items() as $item)
-            {
-                $data['items'][] = [
-                  'title' => $item->get_title(),
-                  'link' => $item->get_permalink(),
-                  'content' => strip_tags(Str::limit($item->get_content(), 1000)),
-                  'date' => $item->get_date('j M Y, g:i a'),
-                ];
-            }
-        }
+        $data = $this->feedService->getFeedItems($feed);
 
         return view('feed.show', compact('feed', 'data'));
     }
@@ -106,17 +79,13 @@ class FeedController extends Controller
     /**
      * Update feed
      *
-     * @param Request $request
+     * @param UpdateFeedRequest $request
      * @param Feed $feed
      * @return RedirectResponse
      */
-    public function update(Request $request, Feed $feed): RedirectResponse
+    public function update(UpdateFeedRequest $request, Feed $feed): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'url' => 'required|string'
-        ]);
-
+        $data = $request->validated();
         $feed->update($data);
 
         return redirect()->route('feed.show', $feed->id);
