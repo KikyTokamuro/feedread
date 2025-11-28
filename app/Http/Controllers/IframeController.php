@@ -12,6 +12,11 @@ use Proxy\Plugin\StreamPlugin;
 
 class IframeController extends Controller
 {
+    /**
+     * Proxy URL
+     *
+     * @param Request $request
+     */
     public function proxy(Request $request)
     {
         $url = url_decrypt($request->get('q'));
