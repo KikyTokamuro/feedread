@@ -2,15 +2,21 @@
     "name": "kikytokamuro/feedread",
     "type": "feedread",
     "description": "Simple Atom/RSS reader",
-    "keywords": ["laravel", "framework", "rss", "atom", "reader"],
+    "keywords": [
+        "laravel",
+        "framework",
+        "rss",
+        "atom",
+        "reader"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ashallendesign/favicon-fetcher": "^3.11",
         "athlon1600/php-proxy": "^5.2",
         "guzzlehttp/guzzle": "^7.10.5",
-        "laravel/framework": "^10.50.2",
-        "laravel/sanctum": "^3.3.3",
+        "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.11.1",
         "simplepie/simplepie": "^1.9",
         "spatie/laravel-settings": "^3.4.1"
@@ -21,8 +27,8 @@
         "laravel/sail": "^1.61",
         "laravel/ui": "^4.6.3",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^7.12",
-        "phpunit/phpunit": "^10.5.63",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0",
         "spatie/laravel-ignition": "^2.9.1"
     },
     "autoload": {
