@@ -1,4 +1,92 @@
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+// ---------------------------------------------------------------------------
+// Brand
+// ---------------------------------------------------------------------------
+
+$fr-accent: #5566d6;
+$fr-accent-strong: #4353c4;
+$fr-accent-contrast: #fff;
+
+$fr-accent-solid: #5566d6;
+$fr-accent-solid-strong: #4353c4;
+
+$fr-brand: #f28b2b;
+$fr-brand-strong: #e0761a;
+
+// ---------------------------------------------------------------------------
+// Light palette
+// ---------------------------------------------------------------------------
+
+$fr-page-bg: #f4f5f9;
+$fr-surface: #fff;
+$fr-surface-muted: #eef0f6;
+$fr-surface-sunken: #e7eaf3;
+
+$fr-text: #191b22;
+$fr-text-muted: #6b7385;
+$fr-text-faint: #8b93a5;
+
+$fr-border: #e2e5ee;
+$fr-border-strong: #cfd5e3;
+
+$fr-sidebar-bg: #1b1f2e;
+$fr-sidebar-bg-end: #14161f;
+$fr-sidebar-fg: rgba(255, 255, 255, 0.7);
+$fr-sidebar-fg-strong: #fff;
+$fr-sidebar-hover: rgba(255, 255, 255, 0.08);
+$fr-sidebar-active: rgba(255, 255, 255, 0.12);
+$fr-sidebar-border: rgba(255, 255, 255, 0.08);
+
+// ---------------------------------------------------------------------------
+// Dark palette
+// ---------------------------------------------------------------------------
+
+$fr-dark-page-bg: #0e1015;
+$fr-dark-surface: #171a21;
+$fr-dark-surface-muted: #1d212a;
+$fr-dark-surface-sunken: #232833;
+
+$fr-dark-text: #e7e9f0;
+$fr-dark-text-muted: #9aa2b3;
+$fr-dark-text-faint: #7d8595;
+
+$fr-dark-border: #272c37;
+$fr-dark-border-strong: #39404e;
+
+$fr-dark-accent: #8f9df6;
+$fr-dark-accent-strong: #a9b4f9;
+
+$fr-dark-accent-solid: #5a68d8;
+$fr-dark-accent-solid-strong: #4b58c6;
+
+$fr-dark-sidebar-bg: #14171f;
+$fr-dark-sidebar-bg-end: #0f1117;
+
+// ---------------------------------------------------------------------------
+// Shape and type
+// ---------------------------------------------------------------------------
+
+$fr-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif;
+
+$fr-radius-card: 0.9rem;
+$fr-radius-panel: 1rem;
+
+// ---------------------------------------------------------------------------
+// Bootstrap configuration
+// ---------------------------------------------------------------------------
+
+$primary: $fr-accent;
+$font-family-sans-serif: $fr-font-family;
+$font-size-base: 0.9375rem;
 $line-height-base: 1.6;
+$headings-font-weight: 650;
+$btn-font-weight: 550;
+
+$border-radius: 0.6rem;
+$border-radius-sm: 0.45rem;
+$border-radius-lg: 0.9rem;
+
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$enable-negative-margins: true;

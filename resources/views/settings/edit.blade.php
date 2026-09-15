@@ -1,40 +1,38 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="page-header pt-3">
+    <div class="page-header">
         <h2>Settings</h2>
+        <p class="page-header__meta">These settings are stored on your account.</p>
     </div>
     <hr>
+
     <div class="row">
-        <form action="{{ route('settings.update') }}" method="post">
-            @csrf
-            @method('PATCH')
+        <div class="col-lg">
+            <form class="panel" action="{{ route('settings.update') }}" method="post">
+                @csrf
+                @method('PATCH')
 
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="preview" name="preview" 
-                        @if($settings->preview) checked @endif>
-                    <label class="form-check-label" for="preview">Show preview for feed item</label>
+                <div class="form-check form-switch mb-4">
+                    <input id="dark" name="dark" type="checkbox" role="switch" value="1"
+                           class="form-check-input" @checked($user->dark)>
+                    <label for="dark" class="form-check-label">
+                        <span class="d-block fw-semibold">Dark colour scheme</span>
+                        <span class="form-text d-block mt-0">
+                            Switches the whole interface, including the sidebar, to the dark palette.
+                        </span>
+                    </label>
+                    @error('dark')
+                        <p class="form-error">{{ $message }}</p>
+                    @enderror
                 </div>
-                @error('preview')
-                    <p class="text-danger p-lg-1">{{ $message }}</p>
-                @enderror
-            </div>
 
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="dark" name="dark"
-                        @if($settings->dark) checked @endif>
-                    <label class="form-check-label" for="dark">Dark colorscheme</label>
+                <div class="d-flex justify-content-end">
+                    <button id="save-btn" type="submit" class="btn btn-accent">
+                        <i class="bi bi-check-lg"></i> Save
+                    </button>
                 </div>
-                @error('dark')
-                    <p class="text-danger p-lg-1">{{ $message }}</p>
-                @enderror
-            </div>
-            
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button id="save-btn" type="submit" class="btn border-0 btn-primary">Save</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 @endsection

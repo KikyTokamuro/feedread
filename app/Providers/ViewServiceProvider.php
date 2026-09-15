@@ -3,9 +3,8 @@
 namespace App\Providers;
 
 use App\View\Composers\FeedComposer;
-use App\View\Composers\SettingsComposer;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -14,10 +13,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Settings
-        View::composer('*', SettingsComposer::class);
-
-        // Feeds for sidebar
-        View::composer('layouts.main', FeedComposer::class);
+        // Feeds for the sidebar and for the empty state of the welcome page.
+        View::composer(['layouts.main', 'main'], FeedComposer::class);
     }
 }

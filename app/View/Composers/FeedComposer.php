@@ -2,16 +2,23 @@
 
 namespace App\View\Composers;
 
-use App\Models\Feed;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class FeedComposer
 {
     /**
-     * @param View $view
+     * Share the sidebar feeds of the signed in user with the layout.
      */
     public function compose(View $view): void
     {
-        $view->with('feeds', Feed::orderBy('created_at', 'desc')->get());
+        $user = Auth::user();
+
+        $view->with('feeds', $user
+            ? $user->feeds()
+                ->withCount(['items as unread_count' => fn ($query) => $query->whereNull('read_at')])
+                ->orderBy('title')
+                ->get()
+            : collect());
     }
 }

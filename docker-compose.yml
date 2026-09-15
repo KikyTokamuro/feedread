@@ -36,6 +36,25 @@ services:
         networks:
             - app-network
 
+    # Scheduler Service
+    scheduler:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: feedread-app
+        container_name: feedread-scheduler
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
+        depends_on:
+            - database
+        command: php artisan schedule:work
+        volumes:
+            - ./:/var/www
+            - ./storage:/var/www/storage
+        networks:
+            - app-network
+
     # Nginx Service
     webserver:
         image: nginx:alpine

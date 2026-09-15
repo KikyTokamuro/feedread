@@ -31,14 +31,16 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-
-        // Feed not found
-        if ($e instanceof ModelNotFoundException) {
-            if (str_starts_with($request->getRequestUri(), '/feeds/')) {
-                $wrongId = $e->getIds()[0];
-
-                return response()->view('feed.not_found', compact('wrongId'));
+        // A feed that does not exist (or belongs to somebody else) gets the app
+        // styled error page instead of the generic one. Route model binding runs
+        // before the auth middleware, so a visitor without a session is sent to
+        // the sign in page rather than shown an empty shell.
+        if ($e instanceof ModelNotFoundException && str_starts_with($request->getRequestUri(), '/feeds/')) {
+            if (! $request->user()) {
+                return redirect()->route('login');
             }
+
+            return response()->view('feed.not_found', ['wrongId' => $e->getIds()[0] ?? null], 404);
         }
 
         return parent::render($request, $e);
