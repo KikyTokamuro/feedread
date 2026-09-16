@@ -26,7 +26,7 @@
                     <input id="url" name="url" type="text" value="{{ old('url') }}"
                            class="form-control" placeholder="https://example.com/feed.xml" required>
                     <div class="form-text">
-                        Atom, RSS or JSON feed. It has to be publicly reachable.
+                        Atom, RSS feed. It has to be publicly reachable.
                     </div>
                     @error('url')
                         <p class="form-error">{{ $message }}</p>
