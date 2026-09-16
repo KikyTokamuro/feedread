@@ -4,7 +4,7 @@
     <div class="hero">
         <span class="hero__logo"><i class="bi bi-rss-fill" aria-hidden="true"></i></span>
         <h1 class="hero__title">FeedRead</h1>
-        <p class="hero__tagline">A small Atom, RSS and JSON feed reader.</p>
+        <p class="hero__tagline">A small Atom, RSS feed reader.</p>
         <span class="badge badge-muted">v{{ Config::get('app.version') }}</span>
 
         @if($feeds->isEmpty())
