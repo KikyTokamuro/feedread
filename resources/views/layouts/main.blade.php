@@ -74,12 +74,6 @@
                         </a>
                     @endif
 
-                    @if($feeds->isEmpty())
-                        <a id="add-feed-btn" href="{{ route('feed.add') }}" class="btn btn-accent" title="Add a feed">
-                            <i class="bi bi-plus-lg"></i> Add
-                        </a>
-                    @endif
-
                     @yield('buttons')
                 </div>
 
