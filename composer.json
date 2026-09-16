@@ -13,13 +13,11 @@
     "require": {
         "php": "^8.2",
         "ashallendesign/favicon-fetcher": "^3.11",
-        "athlon1600/php-proxy": "^5.2",
         "guzzlehttp/guzzle": "^7.10.5",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.11.1",
-        "simplepie/simplepie": "^1.9",
-        "spatie/laravel-settings": "^3.4.1"
+        "simplepie/simplepie": "^1.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",

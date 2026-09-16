@@ -12,7 +12,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $minutes = (int) config('feedread.refresh_interval_minutes', 30);
+
+        // The cron expression cannot express intervals longer than an hour, so
+        // anything out of range simply falls back to hourly.
+        if ($minutes < 1 || $minutes > 59) {
+            $schedule->command('feeds:refresh')->hourly()->withoutOverlapping();
+
+            return;
+        }
+
+        $schedule->command('feeds:refresh')
+            ->cron("*/{$minutes} * * * *")
+            ->withoutOverlapping();
     }
 
     /**

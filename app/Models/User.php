@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -41,5 +43,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_admin' => 'boolean',
+        'dark' => 'boolean',
     ];
+
+    /**
+     * Feeds owned by this user.
+     *
+     * @return HasMany<Feed>
+     */
+    public function feeds(): HasMany
+    {
+        return $this->hasMany(Feed::class);
+    }
+
+    /**
+     * Every article belonging to this user's feeds.
+     *
+     * @return HasManyThrough<Item>
+     */
+    public function items(): HasManyThrough
+    {
+        return $this->hasManyThrough(Item::class, Feed::class);
+    }
 }

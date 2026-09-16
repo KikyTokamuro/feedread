@@ -55,6 +55,16 @@ return [
             'lock_path' => storage_path('framework/cache/data'),
         ],
 
+        /*
+         * SimplePie stores its etag / last-modified headers here. It has its
+         * own store so that a SimplePie cache flush cannot wipe the rest of
+         * the application cache.
+         */
+        'simplepie' => [
+            'driver' => 'file',
+            'path' => storage_path('framework/cache/simplepie'),
+        ],
+
         'memcached' => [
             'driver' => 'memcached',
             'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),

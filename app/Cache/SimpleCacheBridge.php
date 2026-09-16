@@ -2,67 +2,107 @@
 
 namespace App\Cache;
 
-use Cache;
+use DateInterval;
+use DateTimeInterface;
+use Illuminate\Support\Facades\Cache;
 use Psr\SimpleCache\CacheInterface;
 
+/**
+ * PSR-16 bridge used by SimplePie to store etag / modified headers.
+ *
+ * It intentionally writes to a dedicated cache store: SimplePie may call
+ * clear() to drop its own cache, and that must not flush the whole
+ * application cache (settings, favicons, sessions).
+ */
 class SimpleCacheBridge implements CacheInterface
 {
-    public function get($key, $default = null): mixed
+    /**
+     * Name of the cache store that holds SimplePie's data.
+     */
+    public const STORE = 'simplepie';
+
+    protected function store(): \Illuminate\Contracts\Cache\Repository
     {
-        return Cache::get($key, $default);
+        return Cache::store(self::STORE);
     }
 
-    public function set($key, $value, $ttl = null): bool
+    public function get(string $key, mixed $default = null): mixed
     {
-        Cache::put($key, $value, $this->ttl2minutes($ttl));
+        return $this->store()->get($key, $default);
+    }
+
+    public function set(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
+    {
+        $this->store()->put($key, $value, $this->ttlToMinutes($ttl));
 
         return true;
     }
 
-    public function delete($key): bool
+    public function delete(string $key): bool
     {
-        return Cache::forget($key);
+        return $this->store()->forget($key);
     }
 
     public function clear(): bool
     {
-        return Cache::flush();
+        return $this->store()->flush();
     }
 
-    public function getMultiple($keys, $default = null): iterable
+    public function getMultiple(iterable $keys, mixed $default = null): iterable
     {
-        return Cache::many($keys);
+        $values = [];
+
+        foreach ($keys as $key) {
+            $values[$key] = $this->get($key, $default);
+        }
+
+        return $values;
     }
 
-    public function setMultiple($values, $ttl = null): bool
+    public function setMultiple(iterable $values, DateInterval|int|null $ttl = null): bool
     {
-        Cache::putMany((array)$values, $this->ttl2minutes($ttl));
+        $minutes = $this->ttlToMinutes($ttl);
+
+        foreach ($values as $key => $value) {
+            $this->store()->put($key, $value, $minutes);
+        }
 
         return true;
     }
 
-    public function deleteMultiple($keys): bool
+    public function deleteMultiple(iterable $keys): bool
     {
         foreach ($keys as $key) {
             $this->delete($key);
         }
+
         return true;
     }
 
-    public function has($key): bool
+    public function has(string $key): bool
     {
-        return Cache::has($key);
+        return $this->store()->has($key);
     }
 
-    protected function ttl2minutes($ttl): float|int|null
+    /**
+     * Convert a PSR-16 TTL to the number of minutes Laravel expects.
+     *
+     * Laravel treats a null TTL as "store forever" and an integer as minutes,
+     * while PSR-16 defines an integer as seconds.
+     */
+    protected function ttlToMinutes(DateInterval|int|null $ttl): ?int
     {
         if (is_null($ttl)) {
             return null;
         }
-        if ($ttl instanceof \DateInterval) {
-            return $ttl->days * 86400 + $ttl->h * 3600 + $ttl->i * 60;
+
+        if ($ttl instanceof DateInterval) {
+            $reference = new \DateTimeImmutable();
+            $seconds = $reference->add($ttl)->getTimestamp() - $reference->getTimestamp();
+        } else {
+            $seconds = $ttl;
         }
 
-        return $ttl / 60;
+        return (int) max(1, ceil($seconds / 60));
     }
 }

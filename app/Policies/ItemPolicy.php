@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Item;
+use App\Models\User;
+
+/**
+ * An article is reachable through the account that owns its feed.
+ */
+class ItemPolicy
+{
+    public function view(User $user, Item $item): bool
+    {
+        return $item->feed?->user_id === $user->id;
+    }
+
+    public function update(User $user, Item $item): bool
+    {
+        return $this->view($user, $item);
+    }
+}
